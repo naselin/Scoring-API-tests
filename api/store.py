@@ -14,6 +14,7 @@ class Store(object):
         self.port = PORT
         self.socket_timeout = SOCKET_TIMEOUT
         self.reconnect_max_attempts = RECONNECT_MAX_ATTEMPTS
+        self.log = log
         self.connect()
 
     def connect(self):
