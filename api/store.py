@@ -27,13 +27,18 @@ class Store(object):
             except Exception:
                 self.connection = None
 
+    def disconnect(self):
+        self.connection = None
+        self.port = 100000
+        self.connect()
+
     def get(self, cid):
         try:
             self.conn.ping()
         except Exception:
             self.connect()
         if not self.connection:
-            raise Exception("Store not connected!")
+            raise tarantool.DatabaseError("Store not connected!")
         tt_int = self.connection.call("get_interests", cid)
         clients_interests = str(tt_int[0])
         clients_interests = clients_interests.replace("\'", "\"")
