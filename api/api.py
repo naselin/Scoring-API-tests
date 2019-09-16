@@ -253,7 +253,7 @@ def clients_interests_handler(request, ctx, store):
     response = {}
     try:
         for cid in interests_request.client_ids:
-          response[str(cid)] = scoring.get_interests(store=store, cid=cid)
+            response[str(cid)] = scoring.get_interests(store=store, cid=cid)
     except Exception as e:
         return str(e), INTERNAL_ERROR
     num_clients = len(interests_request.client_ids)
