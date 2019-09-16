@@ -38,6 +38,16 @@ class TestStore(unittest.TestCase):
         score = self.store.cache_get(args)
         self.assertEqual(score, self.score)
 
+    @cases(["i: 1"])
+    def test_get_disconnected_store(self, args):
+        self.store.disconnect()
+        self.assertRaises(DatabaseError, self.store.get, args)
+
+    @cases(["uid:permanent_uid"])
+    def test_cache_get_disconnected_store(self, args):
+        score = self.store.cache_get(args)
+        self.assertIsNone(score)
+
 
 if __name__ == "__main__":
     unittest.main()
